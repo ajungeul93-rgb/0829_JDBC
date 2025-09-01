@@ -39,7 +39,7 @@ public class MemberView {
 			case 1 : save(); break;
 			case 2 : findAll(); break;
 			case 3 : findById(); break;
-			case 4 : break;
+			case 4 : findByKeyword(); break;
 			case 5 : break;
 			case 6 : break;
 			case 9 : System.out.println("프로그램을 종료합니다."); return;
@@ -118,14 +118,57 @@ public class MemberView {
 	private void findById() {
 		
 		System.out.println("\n아이디로 검색 서비스입니다.");
-		System.out.println("아이디를 입력해주세요 > ");
+		System.out.print("아이디를 입력해주세요 > ");
 		String userId = sc.nextLine();
 		
-		mc.findById(userId);
+		Member member = mc.findById(userId);
+		// 1. 조회결과가 존재하지 않았을 경우 == null; <- DAO에서 null로 초기화 했기 때문
+		// 2. 조회결과가 존재할 경우        == Member 객체의 주소 값
+		/*
+		 *  자바에서 값의 종류
+		 *  정수 = byte, short, int, long
+		 *  실수 = float, double
+		 *  문자 = char
+		 *  논리값 = boolean
+		 * 
+		 *  주소값 = 나머지 다~
+		 */
+		
+		if(member != null) {
+			System.out.println("\n" + userId + "님의 검색 결과입니다.");
+			System.out.println("\n=============================================");
+			System.out.print("아이디 : " + member.getUserId() + ", ");
+			System.out.print("비밀번호 : " + member.getUserPwd() + ", ");
+			System.out.print("이름 : " + member.getUserName() + ", ");
+			System.out.print("이메일 : " + member.getEmail() + ", ");
+			System.out.print("가입일 : " + member.getEnrollDate());
+			System.out.println();
+		} else {
+			System.out.println("존재하지 않는 아이디 입니다.");
+		}
+	}
+	
+	
+	private void findByKeyword() {
+		
+		System.out.println("\n회원 이름 키워드로 검색");
+		System.out.print("검색하고자 하는 키워드를 입력해주세요 > ");
+		String keyword = sc.nextLine();
+		
+		List<Member> members = mc.findByKeyword(keyword);
+		
+		// 뷰에서는 하는 것은
+		if(members.isEmpty()) {
+			System.out.println("조회 결과가 존재하지 않습니다.");
+		} else {
+			for(int i = 0; i < members.size(); i++) {
+			System.out.println((i+1) + "번 째 조회 결과!");
+			System.out.println(members.get(i));
+			}
+		}
 		
 		
 	}
-	
 	
 	
 	

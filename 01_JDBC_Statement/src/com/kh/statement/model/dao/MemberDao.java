@@ -289,9 +289,9 @@ public class MemberDao {
 				    FROM
 				         MEMBER
 				   WHERE
-				         USERID = '
+				         USERID =
 				""";
-		sql += userId + "'";
+		sql += "'" + userId + "'";
 
 		try {
 			// 1) JDBC Driver등록
@@ -321,6 +321,93 @@ public class MemberDao {
 		}
 		// 8) 결과 값 반환
 		return member;
+	}
+	
+	public List<Member> findByKeyword(String keyword){
+		// 0) 필요한 변수들
+		List<Member> members = new ArrayList();
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		// 실행할 SQL문
+		/*
+		 * SELECT
+		 *        USERNO
+		 *      , USERID
+		 *      , USERPWD
+		 *      , USERNAME
+		 *      , EMAIL
+		 *      , ENROLLDATE
+		 *   FROM
+		 *        MEMBER
+		 *  WHERE
+		 *        USERNAME LIKE '%사용자가 입력한값%'
+		 *  ORDER
+		 *     BY
+		 *        ENROLLDATE DESC                 
+		 */
+	
+		String sql = "SELECT "
+		            +          "USERNO "
+				    +   ", " + "USERID "
+		            +   ", " + "USERPWD "
+				    +   ", " + "USERNAME "
+		            +   ", " + "EMAIL "
+				    +   ", " + "ENROLLDATE "
+		            + "FROM "
+				    +          "MEMBER "
+		            + "WHERE "
+				    +          "USERNAME LIKE '%" + keyword + "%' "
+				    + "ORDER "
+				    +    "BY "
+				    +          "ENROLLDATE DESC";
+		
+		try {
+			// 1) JDBC Driver 등록
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			// 2) Connection 객체 생성
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@115.90.212.20:10000:XE",
+					                           "BJG12",
+					                           "BJG121234");
+			
+			// 3) Statement 객체 생성
+			stmt = conn.createStatement();
+			
+			// 4,5) SLQ(SELECT)문을 실행 후 결과 받아오기
+			rset = stmt.executeQuery(sql);
+			
+			// 6) ResultSet객체에서 각 행에 접근하면서
+			// 조회 결과가 있다면 컬럼의 값을 뽑아서 VO객체에 필드에 대입한 뒤
+			// List의 요소로 추가함
+			while(rset.next()) {
+				
+				members.add(new Member(rset.getInt("USERNO")
+						              ,rset.getString("USERID")
+						              ,rset.getString("USERPWD")
+						              ,rset.getString("USERNAME")
+						              ,rset.getString("EMAIL")
+						              ,rset.getDate("ENROLLDATE")));
+			}
+			
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			 // 7) 자원반납 => 생성된 순서의 역순으로 close()를 호출
+		    try {
+		    	rset.close();
+		    	stmt.close();
+		    	conn.close(); // 시간 관계상 생략
+		    } catch(SQLException e) {
+		    	e.printStackTrace();
+		    }
+			
+		}
+		// 8) 결과 값 반환
+		return members;
 	}
 	
 	
