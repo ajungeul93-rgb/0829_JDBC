@@ -1,5 +1,7 @@
 package com.kh.statement.controller;
 
+import java.util.List;
+
 import com.kh.statement.model.dao.MemberDao;
 import com.kh.statement.model.vo.Member;
 
@@ -35,6 +37,34 @@ public class MemberController {
 		
 		// 2. 요청 처리 후 결과값 반환
 		return result;
+	}
+
+	public List<Member> findAll() {
+		
+		// 1. 데이터 가공 == 할게 없음
+		
+		// 2. DAO 호출
+		List<Member> members = new MemberDao().findAll();
+		
+		// 3. 결과값 반환
+		return members;
+		
+	}
+	
+	/**
+	 * 사용자에게 입력받은 아이디 값을 이용해서 검색요청을 처리해주는 메소드
+	 * 
+	 * @param userId : 사용자가 입력한 찾고자 하는 아이디, 검색하려는 문자열
+	 */
+	public Member findById(String userId) {
+		
+		// 1. 데이터 가공 => 없음 X
+		
+		// 2. 요청처리 => DAO 객체 생성 후 메소드 호출
+		Member member = new MemberDao().findById(userId);
+		
+		// 3. 요청 처리 후 결과값을 View에게 반환
+		return member;
 	}
 
 }
