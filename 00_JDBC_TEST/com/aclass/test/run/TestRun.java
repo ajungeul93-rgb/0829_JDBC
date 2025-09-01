@@ -9,11 +9,7 @@ import java.util.Scanner;
 public class TestRun {
 
 	public static void main(String[] args) {
-        // JDBC 맛보기
-		/*
-		 * 1. 디비버 실행(프로그램 실행)
-		 * 
-		 * 2. 접속하기 
+      
 		// JDBC 맛보기
 		/*
 		 * 1. 디비버 실행(클라이언트 프로그램 실행)
@@ -36,17 +32,6 @@ public class TestRun {
 		 * 
 		 * 10. COMMIT;
 		 * 
-		 * 5. IP주소, PORT번호, 사용자계정, 비밀번호
-		 * 
-		 * 6. 새 SQL편집기
-		 * 
-		 * 7. INSERT문 작성 ==> INSERT INTO 테이블명 VALUES('값', '값', '값);
-		 * 
-		 * 8. SQL문을 작성
-		 * 
-		 * 9. UpdatedRows : 1
-		 * 
-		 * 10. COMMIT;
 		 */
 		// 0) 필요한 변수 세팅
 		Connection conn = null;
