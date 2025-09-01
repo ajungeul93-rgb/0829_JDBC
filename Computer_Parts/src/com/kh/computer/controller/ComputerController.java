@@ -1,5 +1,6 @@
 package com.kh.computer.controller;
 
+import com.kh.computer.model.dao.ComputerDao;
 import com.kh.computer.model.vo.Computer;
 
 public class ComputerController {
@@ -8,7 +9,7 @@ public class ComputerController {
 	
 		Computer com = new Computer(partId, category, price, manufacturer);
 		
-		
+		int result = new ComputerDao().addPcPart(com);
 		
 	}
 
