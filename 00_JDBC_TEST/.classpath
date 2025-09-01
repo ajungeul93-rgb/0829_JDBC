@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="src" path="src"/>
-<<<<<<< HEAD
+	<classpathentry kind="src" path=""/>
 	<classpathentry kind="lib" path="C:/BG/dev/ojdbc11-23.2.0.0.jar">
-=======
-	<classpathentry kind="lib" path="D:/date_set/ojdbc11-23.2.0.0.jar">
->>>>>>> afbf8b7faf48381c4556258e16044b93c85751f7
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
