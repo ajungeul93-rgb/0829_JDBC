@@ -1,0 +1,66 @@
+package com.aclass.plant.run;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class PlantSelectRun {
+
+	public static void main(String[] args) {
+
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+
+		try {
+			// 1) JDBC Driver 등록 및 DB 서버 연결 (INSERT와 동일)
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@115.90.212.20:10000", "BJG12", "BJG121234");
+
+			// 2) SQL 편집기 열기 (Statement 객체 생성)
+			stmt = conn.createStatement();
+
+			// 3) 실행할 SQL문 준비
+			String sql = "SELECT * FROM TB_PLANT";
+
+			// 4) SQL문 실행 후 결과 받기 (executeQuery 사용)
+			// ResultSet: SELECT문의 결과를 담는 가상의 테이블
+			rs = stmt.executeQuery(sql);
+
+			System.out.println("----- 식물 정보 조회 결과 -----");
+
+			// 5) ResultSet에서 한 행씩 데이터 꺼내서 출력하기
+			// rs.next()는 다음 행이 있으면 true를 반환하고, 없으면 false를 반환
+			while (rs.next()) {
+				// get<자료형>("컬럼명"): 해당 컬럼의 값을 가져옴
+				int plantId = rs.getInt("PLANT_ID");
+				String plantName = rs.getString("PLANT_NAME");
+				String plantedDate = rs.getString("PLANTED_DATE");
+				String growthStage = rs.getString("GROWTH_STAGE");
+
+				System.out.println("| 식물 식별번호 : " + plantId + " | 식물 이름 : " + plantName + " | 심은 날짜 : " + plantedDate + " | 성장 단계: " + growthStage + " |");
+			}
+			System.out.println("---------------------------");
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				// 사용한 자원들을 닫아줌
+				if (rs != null)
+					rs.close();
+				if (stmt != null)
+					stmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+}
