@@ -19,6 +19,8 @@ public class ComputerView {
 			System.out.println("2. 부품 전체 조회 ");
 			System.out.println("3. 부품 종류로 조회");
 			System.out.println("4. 제품 이름 키워드로 조회");
+			System.out.println("5. 제품 정보 변경");
+			System.out.println("6. 제품 정보 삭제");
 			System.out.print("메뉴를 선택해주세요 > ");
 			int menuNo = sc.nextInt();
 			sc.nextLine();
@@ -28,6 +30,8 @@ public class ComputerView {
 			case 2 : viewAll(); break;
 			case 3 : findCategory(); break;
 			case 4 : findByKeyword(); break;
+			case 5 : update(); break;
+			case 6 : delete(); break;
 			case 0 : System.out.println("프로그램을 종료합니다."); return;
 			default : System.out.println("잘못된 메뉴 선택입니다.");
 			}
@@ -123,6 +127,13 @@ public class ComputerView {
 				System.out.println(parts.get(i));
 			}
 		}
+		
+	}
+	
+	private void update() {
+		
+		System.out.println("====== 부품 정보 변경 서비스입니다 =======");
+		System.out.print("");
 		
 	}
 
