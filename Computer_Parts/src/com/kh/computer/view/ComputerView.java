@@ -21,6 +21,7 @@ public class ComputerView {
 			System.out.println("4. 제품 이름 키워드로 조회");
 			System.out.println("5. 제품 정보 변경");
 			System.out.println("6. 제품 정보 삭제");
+			System.out.println("0. 프로그램 종료");
 			System.out.print("메뉴를 선택해주세요 > ");
 			int menuNo = sc.nextInt();
 			sc.nextLine();
@@ -132,8 +133,38 @@ public class ComputerView {
 	
 	private void update() {
 		
-		System.out.println("====== 부품 정보 변경 서비스입니다 =======");
-		System.out.print("");
+		System.out.println("====== 부품 제조사 변경 서비스입니다 =======");
+		System.out.print("제품명을 입력해주세요 > ");
+		String partName = sc.nextLine();
+		System.out.print("제품 종류를 입력해주세요 > ");
+		String category = sc.nextLine();
+		System.out.print("변경하실 제품의 제조사를 입력해주세요 > ");
+		String manufacturer = sc.nextLine();
+		
+		int result = cc.update(partName, category, manufacturer);
+		
+		if(result > 0) {
+			System.out.println("새 제조사등록에 성공했습니다.");
+		} else {
+			System.out.println("제품명, 제품 종류 확인해주세요.");
+		}
+	}
+	
+	private void delete() {
+		System.out.println("========== 부품 등록정보 삭제=======");
+		System.out.print("삭제할 제품 등록번호를 입력해주세요 > ");
+		int partId = sc.nextInt();
+		sc.nextLine();
+		System.out.print("삭제할 제품명을 입력해주세요 > ");
+		String partName = sc.nextLine();
+		
+		int result = cc.delete(partId, partName);
+		
+		if(result > 0) {
+			System.out.println("정보삭제 성공.");
+		} else {
+			System.out.println("정보삭제 실패.");
+		}
 		
 	}
 

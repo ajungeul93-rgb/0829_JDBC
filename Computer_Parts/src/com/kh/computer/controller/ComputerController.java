@@ -2,6 +2,7 @@ package com.kh.computer.controller;
 
 import java.util.List;
 
+import com.kh.computer.model.dto.ComputerDTO;
 import com.kh.computer.model.dao.ComputerDao;
 import com.kh.computer.model.vo.Computer;
 
@@ -38,5 +39,26 @@ public class ComputerController {
 		
 		return parts;
 	}
+
+	public int update(String partName, String category, String manufacturer) {
+		
+		ComputerDTO cd = new ComputerDTO(partName, category, manufacturer);
+		
+		int result = new ComputerDao().update(cd);
+		return result;
+	}
+	
+	public int delete(int partId, String partName) {
+		
+		Computer computer = new Computer();
+		computer.setPartId(partId);
+		computer.setPartName(partName);
+		
+		int result = new ComputerDao().delete(computer);
+		
+		return result;
+	}
+	
+	
 
 }

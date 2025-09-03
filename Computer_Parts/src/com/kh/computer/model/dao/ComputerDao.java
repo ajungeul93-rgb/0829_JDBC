@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.computer.model.dto.ComputerDTO;
 import com.kh.computer.model.vo.Computer;
 
 public class ComputerDao {
@@ -43,7 +44,6 @@ public class ComputerDao {
 				    +  ", '"  + com.getManufacturer() + "'"
 				    +  ", "   + "SYSDATE)";
 		
-		System.out.println(sql);
 		
 		try {
 			Class.forName(DRIVER);
@@ -287,6 +287,109 @@ public class ComputerDao {
 		
 		
 		return parts;
+	}
+
+	public int update(ComputerDTO cd) {
+		
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = """
+				  UPDATE
+                         PARTS
+                     SET
+                         MANUFACTURER = ?
+                   WHERE
+                         CATEGORY = ?
+                     AND
+                         PART_NAME = ?     
+				      """;
+		try {
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			conn.setAutoCommit(false);
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, cd.getManufacturer());
+			pstmt.setString(2, cd.getCategory());
+			pstmt.setString(3, cd.getPartName());
+			
+			result = pstmt.executeUpdate();
+			
+			if(result > 0) {
+				conn.commit();
+			}
+			
+		} catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			// 7)
+			
+			try {
+				if(pstmt != null) {
+				pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(conn != null){
+				conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+
+	public int delete(Computer computer) {
+		
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = """
+				       DELETE
+				         FROM
+				              TB_PC_PARTS
+				        WHERE
+				              PART_ID = ?
+				          AND
+				              PART_NAME = ?          
+				""";
+		try {
+			Class.forName(DRIVER);
+			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, computer.getPartId());
+			pstmt.setString(2, computer.getPartName());
+			result = pstmt.executeUpdate();
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(pstmt != null) {
+				pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				if(conn != null) {
+				conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
 	}
 
 }

@@ -15,6 +15,8 @@ public class Computer {
 	public Computer() {
 		super();
 	}
+	
+	
 
 	public Computer(String partName, String category, int price, String manufacturer) {
 		super();
