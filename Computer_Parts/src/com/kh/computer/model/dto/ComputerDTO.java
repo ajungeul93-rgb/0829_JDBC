@@ -3,18 +3,30 @@ package com.kh.computer.model.dto;
 public class ComputerDTO {
 	
 	private String partName; 
-	private String category; 
+	private String category;
+	private int price;
 	private String manufacturer;
 	
 	public ComputerDTO() {
 		super();
 	}
 
-	public ComputerDTO(String partName, String category, String manufacturer) {
+	public ComputerDTO(String partName, String category,int price, String manufacturer) {
 		super();
 		this.partName = partName;
 		this.category = category;
+		this.price = price;
 		this.manufacturer = manufacturer;
+	}
+	
+	
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public String getPartName() {

@@ -7,11 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class JDBCTemplate {
-	/*
-	 * JDBC과정 중 반복적으로 쓰이는 구문들을 각각의 메소드로 정의해둘 클래스
-	 * 중복된 코드들을 메소드로 분리하여 '재사용'
-	 * 이 클래스의 모든 메소드는 전부 Static으로 선언
-	 */
+
 	/**
 	 * JDBC Driver를 등록하는 메소드
 	 * 프로그램 실행 중 단 한번만 실행되면 됨
@@ -124,8 +120,4 @@ public class JDBCTemplate {
 	
 	
 	
-	
-	
-	
-
 }

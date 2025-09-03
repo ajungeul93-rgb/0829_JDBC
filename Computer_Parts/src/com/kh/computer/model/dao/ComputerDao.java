@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.common.JDBCTemplate;
 import com.kh.computer.model.dto.ComputerDTO;
 import com.kh.computer.model.vo.Computer;
 
@@ -19,60 +20,44 @@ public class ComputerDao {
 	private final String USERNAME = "BJG12";
 	private final String PASSWORD = "BJG121234"; 
 
-	public int addPcPart(Computer com) {
+	public int addPcPart(Connection conn, Computer computer) {
 		
-		Connection conn = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String sql = "INSERT " 
-		            +  "INTO " 
-				    +           "TB_PC_PARTS " 
-				    +           "(" 
-		            +           "PART_ID"
-		            +         ", PART_NAME "
-		            +         ", CATEGORY "
-		            +         ", PRICE "
-		            +         ", MANUFACTURER"
-		            +         ", PURCHASEDATE) "
-		            +"VALUES "
-		            +          "("
-		            +           "SEQ_PART_ID.NEXTVAL"
-				    +  ", '"  + com.getPartName() + "'"
-				    +  ", '"  + com.getCategory() + "'"
-				    +  ", "  + com.getPrice()    
-				    +  ", '"  + com.getManufacturer() + "'"
-				    +  ", "   + "SYSDATE)";
-		
+		String sql ="""
+				     INSERT
+		               INTO
+				            TB_PC_PARTS 
+				            (
+		                    PART_ID
+		                  , PART_NAME
+		                  , CATEGORY
+		                  , PRICE
+		                  , MANUFACTURER
+		                  , PURCHASEDATE)
+		             VALUES
+		                    (
+		                    SEQ_PART_ID.NEXTVAL
+				          , ?
+				          , ?
+				          , ?   
+				          , ?
+				          , SYSDATE
+				            )
+		              """;
 		
 		try {
-			Class.forName(DRIVER);
-			
-			conn = DriverManager.getConnection(URL , USERNAME, PASSWORD);
-			
-			stmt = conn.createStatement();
-			
-			result = stmt.executeUpdate(sql);
-		} catch(ClassNotFoundException e) {
-			e.printStackTrace();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, computer.getPartName());
+			pstmt.setString(2, computer.getCategory());
+			pstmt.setInt(3, computer.getPrice());
+			pstmt.setString(4, computer.getManufacturer());
+			result = pstmt.executeUpdate();
 		} catch(SQLException e) {
-			e.printStackTrace();
-		}finally {
-
-			try {
-				if (stmt != null) {
-					stmt.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-			try {
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			 e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
 		} 
 		
 		return result;

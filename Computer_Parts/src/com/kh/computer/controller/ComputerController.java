@@ -3,16 +3,15 @@ package com.kh.computer.controller;
 import java.util.List;
 
 import com.kh.computer.model.dto.ComputerDTO;
+import com.kh.computer.model.service.ComputerService;
 import com.kh.computer.model.dao.ComputerDao;
 import com.kh.computer.model.vo.Computer;
 
 public class ComputerController {
 
-	public int addPcPart(String partId, String category, int price, String manufacturer) {
+	public int addPcPart(ComputerDTO cd) {
 	
-		Computer com = new Computer(partId, category, price, manufacturer);
-		
-		int result = new ComputerDao().addPcPart(com);
+		int result = new ComputerService().addPcPart(cd);
 		
 		return result;
 		
@@ -40,7 +39,7 @@ public class ComputerController {
 		return parts;
 	}
 
-	public int update(String partName, String category, String manufacturer) {
+	public int update(String partName, String category, int price, String manufacturer) {
 		
 		ComputerDTO cd = new ComputerDTO(partName, category, manufacturer);
 		
@@ -57,6 +56,11 @@ public class ComputerController {
 		int result = new ComputerDao().delete(computer);
 		
 		return result;
+	}
+
+	public int addPcPart(String partName, String category, int price, String manufacturer) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

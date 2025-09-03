@@ -33,7 +33,7 @@ public class MemberService {
 	 *            => Service를 추가함으로 DAO는 순수하게 SQL문을 처리하는 부분만 남겨둘 것
 	 */
 	public MemberService() {
-		this.conn = getconnection();
+		this.conn = getConnection();
 	}
 	
 
