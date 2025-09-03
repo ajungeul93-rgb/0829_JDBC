@@ -9,9 +9,11 @@ import com.kh.computer.model.vo.Computer;
 
 public class ComputerController {
 
-	public int addPcPart(ComputerDTO cd) {
+	public int addPcPart(String partName, String category, int price, String manufacturer) {
 	
-		int result = new ComputerService().addPcPart(cd);
+		Computer computer = new Computer(partName, category, price, manufacturer);
+		
+		int result = new ComputerService().addPcPart(computer);
 		
 		return result;
 		
@@ -19,7 +21,7 @@ public class ComputerController {
 	
 	public List<Computer> viewAll(){
 		
-		List<Computer> parts = new ComputerDao().viewAll();
+		List<Computer> parts = new ComputerService().viewAll();
 		
 		return parts;
 		
@@ -27,23 +29,24 @@ public class ComputerController {
 	
 	public Computer findCategory(String category) {
 		
-		Computer computer = new ComputerDao().findCategory(category);
+		Computer computer = new ComputerService().findCategory(category);
 		
 		return computer;
 	}
 
 	public List<Computer> findByKeyword(String keyword) {
 
-		List<Computer> parts = new ComputerDao().findByKeyword(keyword);
+		List<Computer> parts = new ComputerService().findByKeyword(keyword);
 		
 		return parts;
 	}
 
-	public int update(String partName, String category, int price, String manufacturer) {
+	public int update(String partName, String category, String manufacturer) {
 		
 		ComputerDTO cd = new ComputerDTO(partName, category, manufacturer);
 		
-		int result = new ComputerDao().update(cd);
+		int result = new ComputerService().update(cd);
+		
 		return result;
 	}
 	
@@ -53,15 +56,11 @@ public class ComputerController {
 		computer.setPartId(partId);
 		computer.setPartName(partName);
 		
-		int result = new ComputerDao().delete(computer);
+		int result = new ComputerService().delete(computer);
 		
 		return result;
 	}
 
-	public int addPcPart(String partName, String category, int price, String manufacturer) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	
 	
 

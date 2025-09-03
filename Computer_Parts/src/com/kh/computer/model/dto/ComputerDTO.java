@@ -11,23 +11,14 @@ public class ComputerDTO {
 		super();
 	}
 
-	public ComputerDTO(String partName, String category,int price, String manufacturer) {
+	public ComputerDTO(String partName, String category,String manufacturer) {
 		super();
 		this.partName = partName;
 		this.category = category;
-		this.price = price;
 		this.manufacturer = manufacturer;
 	}
 	
 	
-
-	public int getPrice() {
-		return price;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
 
 	public String getPartName() {
 		return partName;

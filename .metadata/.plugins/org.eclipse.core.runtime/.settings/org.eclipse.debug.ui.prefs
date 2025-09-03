@@ -1,6 +1,3 @@
-=\=\=\=\=\=\=
-<<<<<<<=HEAD
->>>>>>>=afbf8b7faf48381c4556258e16044b93c85751f7
 eclipse.preferences.version=1
 org.eclipse.debug.ui.PREF_LAUNCH_PERSPECTIVES=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<launchPerspectives/>\r\n
 org.eclipse.debug.ui.cancel_launch_with_compile_errors=always

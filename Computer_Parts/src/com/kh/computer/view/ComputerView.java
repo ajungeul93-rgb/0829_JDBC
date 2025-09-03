@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.kh.computer.controller.ComputerController;
+import com.kh.computer.model.dto.ComputerDTO;
 import com.kh.computer.model.vo.Computer;
 
 public class ComputerView {
@@ -54,6 +55,7 @@ public class ComputerView {
 		System.out.print("제조사를 입력해주세요 > ");
 		String manufacturer = sc.nextLine();
 		
+		
 		int result = cc.addPcPart(partName, category, price, manufacturer);
 		
 		if(result > 0) {
@@ -101,11 +103,11 @@ public class ComputerView {
 			System.out.println("\n" + category + "의 검색 결과입니다.");
 			System.out.println("\n================================");
 			System.out.print("제품 등록번호 : " + computer.getPartId());
-			System.out.print("제품 이름 : " + computer.getPartName());
-			System.out.print("부품 종류 : " + computer.getCategory());
-			System.out.print("부품 가격 : " + computer.getPrice());
-			System.out.print("부품 제조사 : " + computer.getManufacturer());
-			System.out.print("부품 구매일 : " + computer.getPurchaseDate());
+			System.out.print(" | 제품 이름 : " + computer.getPartName());
+			System.out.print(" | 부품 종류 : " + computer.getCategory());
+			System.out.print(" | 부품 가격 : " + computer.getPrice());
+			System.out.print(" | 부품 제조사 : " + computer.getManufacturer());
+			System.out.print(" | 부품 구매일 : " + computer.getPurchaseDate());
 			System.out.println("\n");
 		} else {
 			System.out.println("제품 정보가 존재하지 않습니다.");
