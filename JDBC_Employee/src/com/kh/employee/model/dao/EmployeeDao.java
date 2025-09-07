@@ -137,25 +137,28 @@ public class EmployeeDao {
 			
 			if(rset.next()) {
 			ed = new EmployeeDto(rset.getInt("EMP_ID"),
-					          rset.getString("EMP_NAME"),
-					          rset.getInt("EMP_NO"),
-					          rset.getString("EMAIL"),
-					          rset.getString("PHONE"),
-					          rset.getString("DEPT_TITLE"),
-					          rset.getString("JOB_NAME"),
-					          rset.getString("SAL_LEVEL"),
-					          rset.getInt("SALARY"),
-					          rset.getDouble("BONUS"),
-					          rset.getInt("MANAGER_ID"),
-					          rset.getDate("HIRE_DATE"),
-					          rset.getString("ENT_YN"));
+					             rset.getString("EMP_NAME"),
+					             rset.getInt("EMP_NO"),
+					             rset.getString("EMAIL"),
+					             rset.getString("PHONE"),
+					             rset.getString("DEPT_TITLE"),
+					             rset.getString("JOB_NAME"),
+					             rset.getString("SAL_LEVEL"),
+					             rset.getInt("SALARY"),
+					             rset.getDouble("BONUS"),
+					             rset.getInt("MANAGER_ID"),
+					             rset.getDate("HIRE_DATE"),
+					             rset.getString("ENT_YN"));
 			}		
 					
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		
-		return null;
+		return ed;
 	}
 
 }
