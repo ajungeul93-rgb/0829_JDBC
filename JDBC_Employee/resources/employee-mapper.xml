@@ -80,6 +80,122 @@
      WHERE
            EMP_ID = ?
     </entry>
+    
+    <entry key="findTop5Salaries">
+      SELECT
+             EMP_ID
+           , EMP_NAME
+       	   , SALARY
+       	   , DEPT_TITLE
+	       , JOB_NAME  
+	    FROM
+	         (SELECT 
+	                 EMP_ID
+	               , EMP_NAME
+	               , SALARY
+	               , DEPT_TITLE
+	               , JOB_NAME
+	            FROM 
+	                 EMPLOYEE
+	            JOIN
+	                 JOB USING(JOB_CODE)
+	            JOIN
+	                 DEPARTMENT ON (DEPT_ID = DEPT_CODE)
+	           ORDER
+	              BY
+	                 SALARY DESC)
+	    WHERE
+	          ROWNUM &lt;= 5
+    </entry>
+    
+    
+    <entry key="findBottom5Salaries">
+          SELECT
+	             EMP_ID
+	           , EMP_NAME
+	       	   , SALARY
+	       	   , DEPT_TITLE
+		       , JOB_NAME  
+		    FROM
+		         (SELECT 
+		                 EMP_ID
+		               , EMP_NAME
+		               , SALARY
+		               , DEPT_TITLE
+		               , JOB_NAME
+		            FROM 
+		                 EMPLOYEE
+		            JOIN
+		                 JOB USING(JOB_CODE)
+		            JOIN
+		                 DEPARTMENT ON (DEPT_ID = DEPT_CODE)
+		           ORDER
+		              BY
+		                 SALARY ASC)
+		    WHERE
+		          ROWNUM &lt;= 5
+    </entry>
+    
+    <entry key="insertEmployee">
+      INSERT
+        INTO
+             EMPLOYEE
+      VALUES
+             (
+             ?
+           , ?
+           , ?
+           , ?
+           , ?
+           , ?
+           , ?
+           , ?
+           , ?
+           , ?
+           , ?
+           , SYSDATE
+           , NULL
+           , ?  
+             )       
+    </entry>
+    
+    <entry key="getJobCodeByName">
+    SELECT 
+           JOB_CODE 
+      FROM JOB 
+     WHERE 
+           JOB_NAME = ?
+    </entry>
+    
+    <entry key="getDeptCodeByTitle">
+    SELECT 
+           DEPT_ID 
+      FROM 
+           DEPARTMENT 
+     WHERE 
+           DEPT_TITLE = ?
+    </entry>
+    
+    <entry key="updateEmployee">
+    UPDATE 
+           EMPLOYEE 
+       SET 
+           SALARY = ?
+         , JOB_CODE = ?
+         , DEPT_ID = ? 
+     WHERE 
+           EMP_ID = ?
+    </entry>
+    
+    <entry key="retireEmployee">
+      UPDATE 
+             EMPLOYEE
+         SET
+             ENT_YN = ?,
+             ENT_DATE = CASE WHEN ? = 'Y' THEN SYSDATE ELSE NULL END
+       WHERE
+             EMP_ID = ?
+    </entry>
 
 
 

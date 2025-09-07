@@ -4,9 +4,9 @@ import java.sql.Date;
 
 public class EmployeeDto {
 
-	private int empId;
+	private String empId;
 	private String empName;
-	private int empNo;
+	private String empNo;
 	private String email;
 	private String phone;
 	private String deptTitle;
@@ -25,13 +25,82 @@ public class EmployeeDto {
 		super();
 		this.empName = empName;
 	}
-	public int getEmpId() {
+	
+	
+	
+	public EmployeeDto(String empId, String empName, String empNo, String email, String phone, String deptTitle,
+			String jobName, String salLevel, int salary, double bonus, String managerId, Date hireDate, String entYn) {
+		super();
+		this.empId = empId;
+		this.empName = empName;
+		this.empNo = empNo;
+		this.email = email;
+		this.phone = phone;
+		this.deptTitle = deptTitle;
+		this.jobName = jobName;
+		this.salLevel = salLevel;
+		this.salary = salary;
+		this.bonus = bonus;
+		this.managerId = managerId;
+		this.hireDate = hireDate;
+		this.entYn = entYn;
+	}
+	
+	public EmployeeDto(String empId, String entYn) {
+		super();
+		this.empId = empId;
+		this.entYn = entYn;
+	}
+	
+	public void setEmpId(String empId) {
+		this.empId = empId;
+	}
+	public void setEmpName(String empName) {
+		this.empName = empName;
+	}
+	public void setEmpNo(String empNo) {
+		this.empNo = empNo;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public void setDeptTitle(String deptTitle) {
+		this.deptTitle = deptTitle;
+	}
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+	public void setSalLevel(String salLevel) {
+		this.salLevel = salLevel;
+	}
+	public void setSalary(int salary) {
+		this.salary = salary;
+	}
+	public void setBonus(double bonus) {
+		this.bonus = bonus;
+	}
+	public void setManagerId(String managerId) {
+		this.managerId = managerId;
+	}
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
+	public void setEntDate(Date entDate) {
+		this.entDate = entDate;
+	}
+	public void setEntYn(String entYn) {
+		this.entYn = entYn;
+	}
+	public String getEmpId() {
 		return empId;
 	}
 	public String getEmpName() {
 		return empName;
 	}
-	public int getEmpNo() {
+	public String getEmpNo() {
 		return empNo;
 	}
 	public String getEmail() {
