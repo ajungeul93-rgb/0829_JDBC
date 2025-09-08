@@ -1,11 +1,16 @@
 package com.kh.employee.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.function.Function;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.kh.common.Template;
 import com.kh.employee.model.dao.EmployeeDao;
 import com.kh.employee.model.dto.EmployeeDto;
 import com.kh.employee.model.vo.Employee;
@@ -19,9 +24,12 @@ public class EmployeeService {
 	}
 
 	public List<Employee> findAll() {
-		Connection conn = getConnection();
-		List<Employee> emp = employeeDao.findAll(conn);
-		close(conn);
+		SqlSession session = Template.getSqlSession();
+		
+		List<Employee> emp = employeeDao.findAll(session);
+		
+		session.close();
+		
 		return emp;
 	}
 
