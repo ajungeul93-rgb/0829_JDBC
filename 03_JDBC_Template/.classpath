@@ -6,7 +6,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/dev/ojdbc11-23.2.0.0.jar">
+	<classpathentry kind="lib" path="D:/JDBC_workspace/03_JDBC_Template/lib/ojdbc11-23.2.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

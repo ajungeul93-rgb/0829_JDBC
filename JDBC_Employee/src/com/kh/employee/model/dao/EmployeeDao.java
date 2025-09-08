@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.kh.common.JDBCTemplate;
 import com.kh.employee.model.dto.EmployeeDto;
 import com.kh.employee.model.vo.Employee;
@@ -28,8 +30,9 @@ public class EmployeeDao {
 
 	}
 
-	public List<Employee> findAll(Connection conn) {
+	public List<Employee> findAll(SqlSession session) {
 
+		/*
 		List<Employee> emp = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -55,7 +58,9 @@ public class EmployeeDao {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return emp;
+		*/
+		
+		return session.selectList("employeeMapper.);
 
 	}
 
@@ -230,7 +235,7 @@ public class EmployeeDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
+
 			pstmt.setString(1, ed.getEmpId());
 			pstmt.setString(2, ed.getEmpName());
 			pstmt.setString(3, ed.getEmpNo());
@@ -259,7 +264,6 @@ public class EmployeeDao {
 	        PreparedStatement pstmt = null;
 	        ResultSet rset = null;
 	        
-	        // XML에 정의된 쿼리문을 사용한다면 다른 방식으로 구현
 	        String sql = prop.getProperty("getJobCodeByName");
 	        
 	        try {
@@ -284,7 +288,6 @@ public class EmployeeDao {
 	        PreparedStatement pstmt = null;
 	        ResultSet rset = null;
 	        
-	        // XML에 정의된 쿼리문을 사용한다면 다른 방식으로 구현
 	        String sql = prop.getProperty("getDeptCodeByTitle");
 	        
 	        try {
@@ -308,7 +311,6 @@ public class EmployeeDao {
 	        int result = 0;
 	        PreparedStatement pstmt = null;
 	        
-	        // XML에 정의된 쿼리문을 사용한다면 다른 방식으로 구현
 	        String sql = prop.getProperty("updateEmployee");
 	        
 	        try {
