@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Employee {
 	
-	private int empId;
+	private String empId;
 	private String empName;
 	private int salary;
 	private String deptTitle;
@@ -14,7 +14,7 @@ public class Employee {
 		super();
 	}
 
-	public Employee(int empId, String empName, int salary, String deptTitle, String jobName) {
+	public Employee(String empId, String empName, int salary, String deptTitle, String jobName) {
 		super();
 		this.empId = empId;
 		this.empName = empName;
@@ -23,11 +23,11 @@ public class Employee {
 		this.jobName = jobName;
 	}
 
-	public int getEmpId() {
+	public String getEmpId() {
 		return empId;
 	}
 
-	public void setEmpId(int empId) {
+	public void setEmpId(String empId) {
 		this.empId = empId;
 	}
 
