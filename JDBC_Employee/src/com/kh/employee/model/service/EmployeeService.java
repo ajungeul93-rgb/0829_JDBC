@@ -1,7 +1,9 @@
 package com.kh.employee.model.service;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -14,179 +16,118 @@ public class EmployeeService {
 
 	private final EmployeeDao employeeDao = new EmployeeDao();
 
-
 	public List<Employee> findAll() {
-		
+
 		SqlSession session = Template.getSqlSession();
-		
+
 		List<Employee> emp = employeeDao.findAll(session);
-		
+
 		session.close();
-		
+
 		return emp;
 	}
 
 	public List<Employee> findByDept(String deptTitle) {
-		/*
-		Connection conn = getConnection();
-		List<Employee> emp = employeeDao.findByDept(conn, deptTitle);
-		close(conn);
-		return emp;
-		*/
+
 		SqlSession session = Template.getSqlSession();
-		
+
 		List<Employee> emp = employeeDao.findByDept(session, deptTitle);
-		
+
 		session.close();
-		
+
 		return emp;
-		
+
 	}
 
 	public List<Employee> findByJob(String jobName) {
-		/*
-		Connection conn = getConnection();
-		List<Employee> emp = employeeDao.findByJob(conn, jobName);
-		close(conn);
-		*/
+
 		SqlSession session = Template.getSqlSession();
-		
+
 		List<Employee> emp = employeeDao.findByJob(session, jobName);
-		
+
 		return emp;
 	}
 
 	public EmployeeDto findByEmployee(String empId) {
-		
-		/*
-		Connection conn = getConnection();
-		EmployeeDto ed = employeeDao.findByEmployee(conn, empId);
-		close(conn);
-		*/
-		
+
 		SqlSession session = Template.getSqlSession();
-		
-		EmployeeDto ed = employeeDao.findByEmployee(session , empId);
-		
+
+		EmployeeDto ed = employeeDao.findByEmployee(session, empId);
+
 		return ed;
 	}
 
 	public List<Employee> findTop5Salaries() {
-		
-		/*
-		Connection conn = getConnection();
-		List<Employee> emp = employeeDao.findTop5Salaries(conn);
-		close(conn);
-		*/
-		
+
 		SqlSession session = Template.getSqlSession();
-		
+
 		List<Employee> emp = employeeDao.findTop5Salaries(session);
-		
+
 		return emp;
 	}
 
 	public List<Employee> findBottom5Salaries() {
-		/*
-		Connection conn = getConnection();
-		List<Employee> emp = employeeDao.findBottom5Salaries(conn);
-		close(conn);
-		*/
-		
+
 		SqlSession session = Template.getSqlSession();
-		
+
 		List<Employee> emp = employeeDao.findBottom5Salaries(session);
-		
+
 		return emp;
 	}
 
 	public int insertEmployee(EmployeeDto ed) {
-		
-		/*
-		Connection conn = getConnection();
-		int result = employeeDao.insertEmployee(conn, ed);
-		if (result > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
-		close(conn);
-		*/
+
 		SqlSession session = Template.getSqlSession();
-		
+
 		int result = employeeDao.insertEmployee(session, ed);
-		
+
 		return result;
 	}
 
 	public int updateEmployee(String empId, int salary, String jobName, String deptTitle) {
-		
-		/*
-		Connection conn = null;
+
+		SqlSession session = Template.getSqlSession();
 		int result = 0;
 
 		try {
-			conn = getConnection();
+			String jobCode = employeeDao.getJobCodeByName(session, jobName);
+			String deptCode = employeeDao.getDeptCodeByTitle(session, deptTitle);
 
-			String jobCode = employeeDao.getJobCodeByName(conn, jobName);
-			String deptCode = employeeDao.getDeptCodeByTitle(conn, deptTitle);
+			Map<String, Object> param = new HashMap<>();
+			param.put("empId", empId);
+			param.put("salary", salary);
+			param.put("jobCode", jobCode);
+			param.put("deptId", deptCode);
 
-			if (jobCode == null) {
-				throw new IllegalArgumentException("존재하지 않는 직급명입니다.");
-			}
-
-			if (deptCode == null) {
-				throw new IllegalArgumentException("존재하지 않는 부서명입니다.");
-			}
-
-			result = employeeDao.updateEmployee(conn, empId, salary, jobCode, deptCode);
+			result = employeeDao.updateEmployee(session, param);
 
 			if (result > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
+				session.commit();
 			}
-
 		} catch (Exception e) {
-			if (conn != null) { // conn이 null이 아닐 때만 rollback 실행
-				rollback(conn);
-			}
-			throw e;
-
+			session.rollback();
+			e.printStackTrace();
 		} finally {
-			if (conn != null) { // conn이 null이 아닐 때만 close 실행
-				close(conn);
-			}
-		}*/
-		SqlSession session = Template.getSqlSession();
-		
-		int result = employeeDao.updateEmployee(session, empId, salary, jobCode, deptCode);
-		
+			session.close();
+		}
+
 		return result;
 	}
 
 	public int retireEmployee(EmployeeDto ed) {
-		Connection conn = null;
-		int result = 0;
-
-		try {
-			conn = getConnection();
-			result = employeeDao.retireEmployee(conn, ed);
-
-			if (result > 0) {
-				commit(conn);
-			} else {
-				rollback(conn);
-			}
-		} catch (Exception e) {
-			if (conn != null) {
-				rollback(conn);
-			}
-			e.printStackTrace();
-		} finally {
-			close(conn);
+		
+		SqlSession session = Template.getSqlSession();
+		
+		int result = employeeDao.retireEmployee(session, ed);
+		
+		if(result > 0) {
+			session.commit();
 		}
+		
+		session.close();
+		
 		return result;
+		
 	}
 
 }

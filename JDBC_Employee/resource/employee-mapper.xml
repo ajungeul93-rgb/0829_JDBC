@@ -164,5 +164,51 @@
            , #{entYn}  
              ) 
 	</insert>
+	
+	<select id="getJobCodeByName"
+			parameterType="string"
+			resultType="java.lang.String">
+		SELECT 
+	           JOB_CODE 
+	      FROM JOB 
+	     WHERE 
+	           JOB_NAME = #{jobName}
+	
+	</select>
+
+	<select id="getDeptCodeByTitle"
+			parameterType="string"
+			resultType="java.lang.String">
+		SELECT 
+	           DEPT_ID 
+	      FROM 
+	           DEPARTMENT 
+	     WHERE 
+	           DEPT_TITLE = #{deptTitle}
+	</select>
+
+	<update id="updateEmployee"
+			parameterType="java.util.Map">
+		UPDATE 
+	           EMPLOYEE 
+	       SET 
+	           SALARY = #{salary}
+	         , JOB_CODE = #{jobCode}
+	         , DEPT_CODE = #{deptId}
+	     WHERE 
+	           EMP_ID = #{empId}
+	</update>
+	
+	<update id="retireEmployee"
+			parameterType="employeeDto">
+		 UPDATE 
+	             EMPLOYEE
+	         SET
+	             ENT_YN = #{entYn},
+	             ENT_DATE = CASE WHEN #{entYn} = 'Y' THEN SYSDATE ELSE NULL END
+	       WHERE
+	             EMP_ID = #{empId}
+	</update>
+	
 
 </mapper>

@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.ibatis.session.SqlSession;
@@ -18,334 +19,61 @@ import com.kh.employee.model.vo.Employee;
 
 public class EmployeeDao {
 
-
 	public List<Employee> findAll(SqlSession session) {
 
-		/*
-		List<Employee> emp = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("findAll");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Employee employee = new Employee(rset.getString("EMP_ID"),
-						                         rset.getString("EMP_NAME"),
-						                         rset.getInt("SALARY"),
-						                         rset.getString("DEPT_TITLE"),
-						                         rset.getString("JOB_NAME"));
-				emp.add(employee);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-		*/
-		
 		return session.selectList("employeeMapper.findAll");
 
 	}
 
-	public List<Employee> findByDept(SqlSession session , String deptTitle) {
+	public List<Employee> findByDept(SqlSession session, String deptTitle) {
 
-		/*
-		List<Employee> emp = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("findByDept");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, deptTitle);
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Employee employee = new Employee(rset.getString("EMP_ID"),
-						                         rset.getString("EMP_NAME"),
-						                         rset.getInt("SALARY"),
-						                         rset.getString("DEPT_TITLE"),
-						                         rset.getString("JOB_NAME"));
-				emp.add(employee);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}*/
-
-		return session.selectList("employeeMapper.findByDept",deptTitle);
+		return session.selectList("employeeMapper.findByDept", deptTitle);
 	}
 
-	public List<Employee> findByJob(SqlSession session , String jobName) {
+	public List<Employee> findByJob(SqlSession session, String jobName) {
 
-		/*
-		List<Employee> emp = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("findByJob");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, jobName);
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Employee employee = new Employee(rset.getString("EMP_ID"),
-						                         rset.getString("EMP_NAME"),
-						                         rset.getInt("SALARY"),
-						                         rset.getString("DEPT_TITLE"),
-						                         rset.getString("JOB_NAME"));
-				emp.add(employee);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}*/
-		
 		return session.selectList("employeeMapper.findByJob", jobName);
 	}
 
 	public EmployeeDto findByEmployee(SqlSession session, String empId) {
-
-		/*
-		EmployeeDto ed = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("findByEmployee");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, empId);
-			rset = pstmt.executeQuery();
-
-			if (rset.next()) {
-				ed = new EmployeeDto(rset.getString("EMP_ID"),
-						             rset.getString("EMP_NAME"),
-						             rset.getString("EMP_NO"),
-						             rset.getString("EMAIL"),
-						             rset.getString("PHONE"),
-						             rset.getString("DEPT_TITLE"),
-						             rset.getString("JOB_NAME"),
-						             rset.getString("SAL_LEVEL"),
-						             rset.getInt("SALARY"),
-						             rset.getDouble("BONUS"),
-						             rset.getString("MANAGER_ID"),
-						             rset.getDate("HIRE_DATE"),
-						             rset.getString("ENT_YN"));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}*/
 
 		return session.selectOne("employeeMapper.findByEmployee", empId);
 	}
 
 	public List<Employee> findTop5Salaries(SqlSession session) {
 
-		/*
-		List<Employee> emp = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = prop.getProperty("findTop5Salaries");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Employee employee = new Employee(rset.getString("EMP_ID"), 
-						                         rset.getString("EMP_NAME"),
-						                         rset.getInt("SALARY"), 
-						                         rset.getString("DEPT_TITLE"), 
-						                         rset.getString("JOB_NAME"));
-				emp.add(employee);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}*/
 		return session.selectList("employeeMapper.findTop5Salaries");
 
 	}
 
 	public List<Employee> findBottom5Salaries(SqlSession session) {
-		
-		/*
-		List<Employee> emp = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 
-		String sql = prop.getProperty("findBottom5Salaries");
-
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Employee employee = new Employee(rset.getString("EMP_ID"), 
-						                         rset.getString("EMP_NAME"),
-						                         rset.getInt("SALARY"), 
-						                         rset.getString("DEPT_TITLE"), 
-						                         rset.getString("JOB_NAME"));
-				emp.add(employee);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}*/
 		return session.selectList("employeeMapper.findBottom5Salaries");
 	}
 
 	public int insertEmployee(SqlSession session, EmployeeDto ed) {
 
-		/*
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String sql = prop.getProperty("insertEmployee");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, ed.getEmpId());
-			pstmt.setString(2, ed.getEmpName());
-			pstmt.setString(3, ed.getEmpNo());
-			pstmt.setString(4, ed.getEmail());
-			pstmt.setString(5, ed.getPhone());
-			pstmt.setString(6, ed.getDeptTitle());
-			pstmt.setString(7, ed.getJobName());
-			pstmt.setString(8, ed.getSalLevel());
-			pstmt.setInt(9, ed.getSalary());
-			pstmt.setDouble(10, ed.getBonus());
-			pstmt.setString(11, ed.getManagerId());
-			pstmt.setString(12, ed.getEntYn());
-			
-			result = pstmt.executeUpdate();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(pstmt);
-		}*/
-		
 		return session.insert("employeeMapper.insertEmployee", ed);
 	}
-	
-	 public String getJobCodeByName(Connection conn, String jobName) {
-	        String jobCode = null;
-	        PreparedStatement pstmt = null;
-	        ResultSet rset = null;
-	        
-	        String sql = prop.getProperty("getJobCodeByName");
-	        
-	        try {
-	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setString(1, jobName);
-	            rset = pstmt.executeQuery();
-	            
-	            if (rset.next()) {
-	                jobCode = rset.getString("JOB_CODE");
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace(); // 실제 서비스에서는 로깅으로 대체
-	        } finally {
-	        	JDBCTemplate.close(rset);
-	        	JDBCTemplate.close(pstmt);
-	        }
-	        return jobCode;
-	    }
-	    
-	    public String getDeptCodeByTitle(Connection conn, String deptTitle) {
-	        String deptCode = null;
-	        PreparedStatement pstmt = null;
-	        ResultSet rset = null;
-	        
-	        String sql = prop.getProperty("getDeptCodeByTitle");
-	        
-	        try {
-	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setString(1, deptTitle);
-	            rset = pstmt.executeQuery();
-	            
-	            if (rset.next()) {
-	                deptCode = rset.getString("DEPT_ID");
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            JDBCTemplate.close(rset);
-	        	JDBCTemplate.close(pstmt);
-	        }
-	        return deptCode;
-	    }
 
-	    public int updateEmployee(Connection conn, String empId, int salary, String jobCode, String deptCode) {
-	        int result = 0;
-	        PreparedStatement pstmt = null;
-	        
-	        String sql = prop.getProperty("updateEmployee");
-	        
-	        try {
-	            pstmt = conn.prepareStatement(sql);
-	            pstmt.setInt(1, salary);
-	            pstmt.setString(2, jobCode);
-	            pstmt.setString(3, deptCode);
-	            pstmt.setString(4, empId);
-	            
-	            result = pstmt.executeUpdate();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            JDBCTemplate.close(pstmt);
-	        }
-	        return result;
-	    }
+	public String getJobCodeByName(SqlSession session, String jobName) {
+		// jobName 변수를 그대로 사용해야 합니다.
+		return session.selectOne("employeeMapper.getJobCodeByName", jobName);
+	}
 
-		public int retireEmployee(Connection conn, EmployeeDto ed) {
+	public String getDeptCodeByTitle(SqlSession session, String deptTitle) {
+		// deptTitle 변수를 그대로 사용해야 합니다.
+		return session.selectOne("employeeMapper.getDeptCodeByTitle", deptTitle);
+	}
 
-			int result = 0;
-			PreparedStatement pstmt = null;
-			
-			String sql = prop.getProperty("retireEmployee");
-			
-			try {
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, ed.getEntYn());
-				pstmt.setString(2, ed.getEntYn());
-		        pstmt.setString(3, ed.getEmpId());
-		        
-		        result = pstmt.executeUpdate();
-				
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				JDBCTemplate.close(pstmt);
-			}
-			return result;
-		}
+	public int updateEmployee(SqlSession session, Map<String, Object> param) {
+
+		return session.update("employeeMapper.updateEmployee", param);
+	}
+
+	public int retireEmployee(SqlSession session, EmployeeDto ed) {
+
+		return session.update("employeeMapper.retireEmployee", ed);
+	}
 
 }

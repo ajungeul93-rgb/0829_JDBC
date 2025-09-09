@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.kh.employee.model.vo.Employee" alias="employee"/>
+		<typeAlias type="com.kh.employee.model.dto.EmployeeDto" alias="employeeDto"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@115.90.212.20:10000:XE"/>
+				<property name="username" value="BJG12"/>
+				<property name="password" value="BJG121234"/>
+			
+			</dataSource>
+			
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="employee-mapper.xml"/>
+	</mappers>
+
+</configuration>
