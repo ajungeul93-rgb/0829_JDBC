@@ -1,2 +1,16 @@
+# 이클립스 관련 파일들
 .metadata/
+.recommenders/
+.vscode/
+.classpath
+.project
+.settings/
+
+# 컴파일된 빌드 파일들
+bin/
+target/
 *.class
+
+# 로그 파일들
+*.log
+*.log.*
