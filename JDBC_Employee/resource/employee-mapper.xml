@@ -143,7 +143,26 @@
 	
 	<insert id="insertEmployee"
 	        parameterType="employeeDto">
-	        
-	        </insert>
+	        INSERT
+        INTO
+             EMPLOYEE
+      VALUES
+             (
+             #{empId}
+           , #{empName}
+           , #{empNo}
+           , #{email}
+           , #{phone}
+           , #{deptTitle}
+           , #{jobName}
+           , #{salLevel}
+           , #{salary}
+           , #{bonus}
+           , #{managerId}
+           , SYSDATE
+           , NULL
+           , #{entYn}  
+             ) 
+	</insert>
 
 </mapper>

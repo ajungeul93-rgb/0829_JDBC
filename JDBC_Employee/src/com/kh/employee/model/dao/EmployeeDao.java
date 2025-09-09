@@ -252,7 +252,7 @@ public class EmployeeDao {
 			JDBCTemplate.close(pstmt);
 		}*/
 		
-		return session.insert("employee.insertEmployee", ed);
+		return session.insert("employeeMapper.insertEmployee", ed);
 	}
 	
 	 public String getJobCodeByName(Connection conn, String jobName) {

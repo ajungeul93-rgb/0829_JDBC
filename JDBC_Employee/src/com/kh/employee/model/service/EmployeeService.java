@@ -120,6 +120,8 @@ public class EmployeeService {
 	}
 
 	public int updateEmployee(String empId, int salary, String jobName, String deptTitle) {
+		
+		/*
 		Connection conn = null;
 		int result = 0;
 
@@ -155,7 +157,11 @@ public class EmployeeService {
 			if (conn != null) { // conn이 null이 아닐 때만 close 실행
 				close(conn);
 			}
-		}
+		}*/
+		SqlSession session = Template.getSqlSession();
+		
+		int result = employeeDao.updateEmployee(session, empId, salary, jobCode, deptCode);
+		
 		return result;
 	}
 
