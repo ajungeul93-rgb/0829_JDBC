@@ -6,12 +6,13 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="D:/JDBC_workspace/JDBC_Employee/lib/mybatis-3.5.17.jar">
+	<classpathentry kind="src" path="resource"/>
+	<classpathentry kind="lib" path="C:/BG/jdbc-workspace/JDBC_Employee/lib/mybatis-3.5.17.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/JDBC_workspace/JDBC_Employee/lib/ojdbc11-23.2.0.0.jar">
+	<classpathentry kind="lib" path="C:/BG/jdbc-workspace/JDBC_Employee/lib/ojdbc11-23.2.0.0.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>

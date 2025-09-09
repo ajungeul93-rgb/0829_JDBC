@@ -1,10 +1,5 @@
 package com.kh.employee.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
-
 import java.sql.Connection;
 import java.util.List;
 
@@ -17,13 +12,11 @@ import com.kh.employee.model.vo.Employee;
 
 public class EmployeeService {
 
-	private final EmployeeDao employeeDao;
+	private final EmployeeDao employeeDao = new EmployeeDao();
 
-	public EmployeeService() {
-		this.employeeDao = new EmployeeDao();
-	}
 
 	public List<Employee> findAll() {
+		
 		SqlSession session = Template.getSqlSession();
 		
 		List<Employee> emp = employeeDao.findAll(session);
@@ -34,41 +27,82 @@ public class EmployeeService {
 	}
 
 	public List<Employee> findByDept(String deptTitle) {
+		/*
 		Connection conn = getConnection();
 		List<Employee> emp = employeeDao.findByDept(conn, deptTitle);
 		close(conn);
 		return emp;
+		*/
+		SqlSession session = Template.getSqlSession();
+		
+		List<Employee> emp = employeeDao.findByDept(session, deptTitle);
+		
+		session.close();
+		
+		return emp;
+		
 	}
 
 	public List<Employee> findByJob(String jobName) {
+		/*
 		Connection conn = getConnection();
 		List<Employee> emp = employeeDao.findByJob(conn, jobName);
 		close(conn);
+		*/
+		SqlSession session = Template.getSqlSession();
+		
+		List<Employee> emp = employeeDao.findByJob(session, jobName);
+		
 		return emp;
 	}
 
 	public EmployeeDto findByEmployee(String empId) {
+		
+		/*
 		Connection conn = getConnection();
 		EmployeeDto ed = employeeDao.findByEmployee(conn, empId);
 		close(conn);
+		*/
+		
+		SqlSession session = Template.getSqlSession();
+		
+		EmployeeDto ed = employeeDao.findByEmployee(session , empId);
+		
 		return ed;
 	}
 
 	public List<Employee> findTop5Salaries() {
+		
+		/*
 		Connection conn = getConnection();
 		List<Employee> emp = employeeDao.findTop5Salaries(conn);
 		close(conn);
+		*/
+		
+		SqlSession session = Template.getSqlSession();
+		
+		List<Employee> emp = employeeDao.findTop5Salaries(session);
+		
 		return emp;
 	}
 
 	public List<Employee> findBottom5Salaries() {
+		/*
 		Connection conn = getConnection();
 		List<Employee> emp = employeeDao.findBottom5Salaries(conn);
 		close(conn);
+		*/
+		
+		SqlSession session = Template.getSqlSession();
+		
+		List<Employee> emp = employeeDao.findBottom5Salaries(session);
+		
 		return emp;
 	}
 
 	public int insertEmployee(EmployeeDto ed) {
+		
+		/*
 		Connection conn = getConnection();
 		int result = employeeDao.insertEmployee(conn, ed);
 		if (result > 0) {
@@ -77,6 +111,11 @@ public class EmployeeService {
 			rollback(conn);
 		}
 		close(conn);
+		*/
+		SqlSession session = Template.getSqlSession();
+		
+		int result = employeeDao.insertEmployee(session, ed);
+		
 		return result;
 	}
 

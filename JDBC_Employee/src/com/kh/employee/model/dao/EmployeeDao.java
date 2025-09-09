@@ -18,17 +18,6 @@ import com.kh.employee.model.vo.Employee;
 
 public class EmployeeDao {
 
-	private Properties prop = new Properties();
-
-	public EmployeeDao() {
-
-		try {
-			prop.loadFromXML(new FileInputStream("resources/employee-mapper.xml"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	public List<Employee> findAll(SqlSession session) {
 
@@ -60,12 +49,13 @@ public class EmployeeDao {
 		}
 		*/
 		
-		return session.selectList("employeeMapper.);
+		return session.selectList("employeeMapper.findAll");
 
 	}
 
-	public List<Employee> findByDept(Connection conn, String deptTitle) {
+	public List<Employee> findByDept(SqlSession session , String deptTitle) {
 
+		/*
 		List<Employee> emp = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -91,13 +81,14 @@ public class EmployeeDao {
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-		}
+		}*/
 
-		return emp;
+		return session.selectList("employeeMapper.findByDept",deptTitle);
 	}
 
-	public List<Employee> findByJob(Connection conn, String jobName) {
+	public List<Employee> findByJob(SqlSession session , String jobName) {
 
+		/*
 		List<Employee> emp = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -123,13 +114,14 @@ public class EmployeeDao {
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-		}
-
-		return emp;
+		}*/
+		
+		return session.selectList("employeeMapper.findByJob", jobName);
 	}
 
-	public EmployeeDto findByEmployee(Connection conn, String empId) {
+	public EmployeeDto findByEmployee(SqlSession session, String empId) {
 
+		/*
 		EmployeeDto ed = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -161,13 +153,14 @@ public class EmployeeDao {
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-		}
+		}*/
 
-		return ed;
+		return session.selectOne("employeeMapper.findByEmployee", empId);
 	}
 
-	public List<Employee> findTop5Salaries(Connection conn) {
+	public List<Employee> findTop5Salaries(SqlSession session) {
 
+		/*
 		List<Employee> emp = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -192,13 +185,14 @@ public class EmployeeDao {
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-		}
-		return emp;
+		}*/
+		return session.selectList("employeeMapper.findTop5Salaries");
 
 	}
 
-	public List<Employee> findBottom5Salaries(Connection conn) {
+	public List<Employee> findBottom5Salaries(SqlSession session) {
 		
+		/*
 		List<Employee> emp = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -223,12 +217,13 @@ public class EmployeeDao {
 		} finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
-		}
-		return emp;
+		}*/
+		return session.selectList("employeeMapper.findBottom5Salaries");
 	}
 
-	public int insertEmployee(Connection conn, EmployeeDto ed) {
+	public int insertEmployee(SqlSession session, EmployeeDto ed) {
 
+		/*
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("insertEmployee");
@@ -255,8 +250,9 @@ public class EmployeeDao {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(pstmt);
-		}
-		return result;
+		}*/
+		
+		return session.insert("employee.insertEmployee", ed);
 	}
 	
 	 public String getJobCodeByName(Connection conn, String jobName) {
