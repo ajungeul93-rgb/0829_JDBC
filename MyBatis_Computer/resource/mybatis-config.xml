@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.kh.computer.model.vo.Computer" alias="computer"/>
+		<typeAlias type="com.kh.computer.model.dto.ComputerDTO" alias="computerDTO"/>
+	</typeAliases>
+	
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC"/>
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@115.90.212.20:10000:XE"/>
+				<property name="username" value="BJG12"/>
+				<property name="password" value="BJG121234"/>
+			
+			</dataSource>
+			
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="computer-mapper.xml"/>
+	</mappers>
+
+</configuration>
