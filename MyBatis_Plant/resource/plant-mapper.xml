@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="plantMapper">
+
+	<select id="findAll"
+			resultType="plant">
+		SELECT
+			   PLANT_ID plantId
+			 , PLANT_NAME plantName
+			 , PLANT_TYPE plantType
+			 , PLANTED_DATE plantedDate
+			 , WATERING_CYCLE wateringCycle
+			 , PLANT_STATUS plantStatus
+		  FROM
+		       TB_PLANTS
+		 ORDER
+		    BY
+		       PLANTED_DATE DESC      	   		
+	</select>
+	
+	<insert id="insertPlant"
+			parameterType="plant">
+		INSERT
+		  INTO
+		       TB_PLANTS
+		VALUES
+			   (
+			   SEQ_PLANT_ID.NEXTVAL
+			 , #{plantName}
+			 , #{plantType}
+			 , SYSDATE
+			 , #{wateringCycle}
+			 , #{plantStatus}  
+			   )       
+	</insert>
+
+	
+	
+	
+
+</mapper>
