@@ -3,6 +3,95 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="computerMapper">
+
+	<insert id="addPcPart"
+			parameterType="computer">
+		INSERT
+          INTO
+               TB_PC_PARTS 
+        VALUES
+               (
+               SEQ_PART_ID.NEXTVAL
+             , #{partName}
+             , #{category}
+             , #{price}   
+             , #{manufacturer}
+             , SYSDATE
+               )
+	
+	</insert>
+	
+	<select id="viewAll"
+			resultType="computer">
+	    SELECT
+               PART_ID partId
+             , PART_NAME partName  
+             , CATEGORY category
+             , PRICE price
+             , MANUFACTURER manufacturer
+   		     , PURCHASEDATE purchasedate
+		  FROM
+     		   TB_PC_PARTS
+	     ORDER
+    	    BY
+       	       PURCHASEDATE DESC
+	</select>
+	
+	<select id="findCategory"
+			resultType="computer">
+		SELECT
+               PART_ID partId
+             , PART_NAME partName
+             , CATEGORY category
+             , PRICE price
+             , MANUFACTURER manufacturer
+             , PURCHASEDATE purchasedate
+          FROM
+               TB_PC_PARTS
+         WHERE
+               CATEGORY = #{category} 
+	</select>
+	
+	<select id="findByKeyword"
+			resultType="computer">
+		SELECT
+               PART_ID partId
+             , PART_NAME partName
+             , CATEGORY category
+             , PRICE price
+             , MANUFACTURER manufacturer
+             , PURCHASEDATE purchasedate
+          FROM
+               TB_PC_PARTS
+         WHERE
+               CATEGORY LIKE '%'||#{keyword}||'%'
+         ORDER
+            BY
+               PURCHASEDATE DESC		
+	</select>
+	
+	<update id="update"
+			parameterType="computerDTO">
+		UPDATE
+               TB_PC_PARTS
+           SET
+               MANUFACTURER = #{manufacturer}
+         WHERE
+               CATEGORY = #{category}
+           AND
+               PART_NAME = #{partName}
+	</update>
+	
+	<delete id="delete"
+			parameterType="computer">
+		DELETE
+		  FROM
+		  	   TB_PC_PARTS
+		 WHERE
+		 	   PART_ID = #{partId}
+		   AND
+		       PART_NAME = #{partName}	    	   
+	</delete>
 	
 	
 

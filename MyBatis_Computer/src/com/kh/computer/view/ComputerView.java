@@ -19,8 +19,8 @@ public class ComputerView {
 			System.out.println("1. 부품 추가 하기 ");
 			System.out.println("2. 부품 전체 조회 ");
 			System.out.println("3. 부품 종류로 조회");
-			System.out.println("4. 제품 이름 키워드로 조회");
-			System.out.println("5. 제품 정보 변경");
+			System.out.println("4. 부품 이름 키워드로 조회");
+			System.out.println("5. 제조사 수정(변경)");
 			System.out.println("6. 제품 정보 삭제");
 			System.out.println("0. 프로그램 종료");
 			System.out.print("메뉴를 선택해주세요 > ");
@@ -97,26 +97,27 @@ public class ComputerView {
 		System.out.print("부품의 종류를 입력해주세요 > ");
 		String category = sc.nextLine();
 		
-		Computer computer = cc.findCategory(category);
+		List<Computer> parts = cc.findCategory(category);
 		
-		if(computer != null) {
-			System.out.println("\n" + category + "의 검색 결과입니다.");
-			System.out.println("\n================================");
-			System.out.print("제품 등록번호 : " + computer.getPartId());
-			System.out.print(" | 제품 이름 : " + computer.getPartName());
-			System.out.print(" | 부품 종류 : " + computer.getCategory());
-			System.out.print(" | 부품 가격 : " + computer.getPrice());
-			System.out.print(" | 부품 제조사 : " + computer.getManufacturer());
-			System.out.print(" | 부품 구매일 : " + computer.getPurchaseDate());
-			System.out.println("\n");
+		System.out.println("\n" + category + "의 검색 결과입니다.");
+		if(parts.isEmpty()) {
+			System.out.println("조회 결과가 존재하지 않습니다.");
 		} else {
-			System.out.println("제품 정보가 존재하지 않습니다.");
+			for(Computer computer : parts) {
+				System.out.println("\n================================");
+				System.out.print("제품 등록번호 : " + computer.getPartId());
+				System.out.print(" | 제품 이름 : " + computer.getPartName());
+				System.out.print(" | 부품 종류 : " + computer.getCategory());
+				System.out.print(" | 부품 가격 : " + computer.getPrice());
+				System.out.print(" | 부품 제조사 : " + computer.getManufacturer());
+				System.out.print(" | 부품 구매일 : " + computer.getPurchaseDate());
+			} 
 		}
 	}
 	
 	private void findByKeyword() {
 		
-		System.out.println("\n제품 이름 키워드로 검색");
+		System.out.println("\n제품 부품 종류 키워드로 검색");
 		System.out.print("검색하실 부품 종류의 키워드를 입력해주세요 > ");
 		String keyword = sc.nextLine();
 		
@@ -146,7 +147,7 @@ public class ComputerView {
 		int result = cc.update(partName, category, manufacturer);
 		
 		if(result > 0) {
-			System.out.println("새 제조사등록에 성공했습니다.");
+			System.out.println("제조사 수정에 성공했습니다.");
 		} else {
 			System.out.println("제품명, 제품 종류 확인해주세요.");
 		}

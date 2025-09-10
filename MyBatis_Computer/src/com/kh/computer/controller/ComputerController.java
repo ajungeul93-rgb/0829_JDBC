@@ -27,9 +27,9 @@ public class ComputerController {
 		
 	}
 	
-	public Computer findCategory(String category) {
+	public List<Computer> findCategory(String category) {
 		
-		Computer computer = new ComputerService().findCategory(category);
+		List<Computer> computer = new ComputerService().findCategory(category);
 		
 		return computer;
 	}
