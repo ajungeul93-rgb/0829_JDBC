@@ -50,6 +50,74 @@
 		 WHERE
 		       PLANT_TYPE = #{plantType}            	
 	</select>
+	
+	<select id="checkPlant"
+			resultType="_int">
+		SELECT
+			   COUNT(*)
+		  FROM
+		       TB_PLANTS
+		 WHERE
+		 	   PLANT_ID = #{plantId}
+		   AND
+		       PLANT_NAME = #{plantName}	           
+	</select>
+	
+	<update id="updateStatus"
+			parameterType="plantDTO">
+		UPDATE
+		       TB_PLANTS
+		   SET
+		       PLANT_STATUS = #{plantStatus}
+		 WHERE 
+		       PLANT_ID = #{plantId}
+		   AND
+		       PLANT_NAME = #{plantName}              		
+	</update>
+	
+	<delete id="deletePlant"
+			parameterType="plant">
+		DELETE
+		  FROM
+		       TB_PLANTS
+		 WHERE
+		       PLANT_ID = #{plantId}
+		   AND
+		       PLANT_NAME = #{plantName}     		
+	</delete>
+	
+	<select id="findByPlant"
+			resultType="plant">
+		SELECT
+		       PLANT_ID plantId
+			 , PLANT_NAME plantName
+			 , PLANT_TYPE plantType
+			 , PLANTED_DATE plantedDate
+			 , WATERING_CYCLE wateringCycle
+			 , PLANT_STATUS plantStatus
+		  FROM
+		       TB_PLANTS
+		 WHERE
+		       PLANT_ID = #{plantId}            	
+	</select>
+	
+	<select id="findByKeyword"
+			resultType="plant">
+		SELECT
+			   PLANT_ID plantId
+			 , PLANT_NAME plantName
+			 , PLANT_TYPE plantType
+			 , PLANTED_DATE plantedDate
+			 , WATERING_CYCLE wateringCycle
+			 , PLANT_STATUS plantStatus
+		  FROM
+		       TB_PLANTS
+		 WHERE
+		 	   PLANT_NAME LIKE '%'||#{Keyword}||'%'
+		 ORDER
+		    BY
+		       PLANT_ID DESC 	         
+	</select>
 
 	
 	
