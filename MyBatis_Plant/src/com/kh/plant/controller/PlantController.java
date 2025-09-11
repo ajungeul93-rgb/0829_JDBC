@@ -23,4 +23,11 @@ public class PlantController {
 		return result;
 	}
 
+	public List<Plant> findByPlantType(String plantType) {
+		
+		List<Plant> plant = new PlantService().findByPlantType(plantType);
+		
+		return plant;
+	}
+
 }

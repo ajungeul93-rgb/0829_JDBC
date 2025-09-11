@@ -86,13 +86,34 @@ public class PlantView {
 	}
 
 	private void findByPlnatType() {
-		// TODO Auto-generated method stub
+
+		System.out.println("========== 식물 종류별 검색 =========");
+		System.out.print("찾으실 식물의 종류를 입력해주세요 > ");
+		String plantType = sc.nextLine();
 		
+		List<Plant> plant = pc.findByPlantType(plantType);
+		
+		System.out.println("\n" + plantType + "의 검색 결과입니다. ");
+		if(plant.isEmpty()) {
+			System.out.println("검색 조회결과가 존재하지 않습니다. ");
+		} else {
+			for(Plant p : plant) {
+				System.out.println("\n================================");
+				System.out.print("식물 식별번호 : " + p.getPlantId());
+				System.out.print(" | 식물 이름 : " + p.getPlantName());
+				System.out.print(" | 식물 종류 : " + p.getPlantType());
+				System.out.print(" | 심은 날짜 : " + p.getPlantedDate());
+				System.out.print(" | 물주는 주기 : " + p.getWateringCycle());
+				System.out.println(" | 식물 성장 상태 : " + p.getPlantStatus());
+			}
+		}
 	}
 
 	private void updateStatus() {
-		// TODO Auto-generated method stub
-		
+
+		System.out.println("======= 식물 성장상태 변경 ========");
+		System.out.print("성장상태 변경을 할 식물 이름을 입력해주세요 > ");
+		String plantName = sc.nextLine();
 	}
 
 	private void deletePlant() {

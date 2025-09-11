@@ -35,6 +35,21 @@
 			 , #{plantStatus}  
 			   )       
 	</insert>
+	
+	<select id="findByPlantType"
+			resultType="plant">
+		SELECT
+		       PLANT_ID plantId
+			 , PLANT_NAME plantName
+			 , PLANT_TYPE plantType
+			 , PLANTED_DATE plantedDate
+			 , WATERING_CYCLE wateringCycle
+			 , PLANT_STATUS plantStatus
+		  FROM
+		       TB_PLANTS
+		 WHERE
+		       PLANT_TYPE = #{plantType}            	
+	</select>
 
 	
 	

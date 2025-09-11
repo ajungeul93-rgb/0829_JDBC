@@ -20,4 +20,10 @@ public class PlantDao {
 		
 	}
 
+	public List<Plant> findByPlantTpye(SqlSession session, String plantType) {
+
+		return session.selectList("plantMapper.findByPlantType", plantType);
+		
+	}
+
 }

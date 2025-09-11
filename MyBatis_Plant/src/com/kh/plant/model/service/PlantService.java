@@ -38,4 +38,15 @@ public class PlantService {
 		return result;
 	}
 
+	public List<Plant> findByPlantType(String plantType) {
+
+		SqlSession session = Template.getSqlSession();
+		
+		List<Plant> plant = plantDao.findByPlantTpye(session, plantType);
+		
+		session.close();
+		
+		return plant;
+	}
+
 }
